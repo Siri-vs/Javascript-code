@@ -1,0 +1,138 @@
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic Statement Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+ 
+<div class="container mt-5">
+  <h2 class="text-center mb-4">User Bank Statements</h2>
+ 
+  
+  <form class="row g-2 mb-3">
+    <div class="col-md-2">
+      <input type="date" id="date" class="form-control">
+    </div>
+    <div class="col-md-3">
+      <input type="text" id="header" class="form-control" placeholder="Description">
+    </div>
+    <div class="col-md-2">
+      <input type="number" id="credit" class="form-control" placeholder="Credit">
+    </div>
+    <div class="col-md-2">
+      <input type="number" id="debit" class="form-control" placeholder="Debit">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary w-100" onclick="addTransaction()">Add</button>
+    </div>
+  </form>
+ 
+  
+  <div class="table-responsive">
+    <table class="table table-bordered text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>TxID</th>
+          <th>TxnDate</th>
+          <th>Header</th>
+          <th>Credit</th>
+          <th>Debit</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody"></tbody>
+      <tfoot>
+        <tr>
+          <th colspan="3">Totals</th>
+          <th id="totalCredit">0</th>
+          <th id="totalDebit">0</th>
+          <th></th>
+        </tr>
+        <tr>
+          <th colspan="4">Balance</th>
+          <th id="balance">0</th>
+          <th></th>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>
+ 
+<script>
+let transactions = JSON.parse(localStorage.getItem("transactions")) || [];
+ 
+// Save to localStorage
+function saveData() {
+  localStorage.setItem("transactions", JSON.stringify(transactions));
+}
+ 
+// Render table
+function renderTable() {
+  const tbody = document.getElementById("tableBody");
+  tbody.innerHTML = "";
+ 
+  let totalCredit = 0;
+  let totalDebit = 0;
+ 
+  transactions.forEach((txn, index) => {
+    totalCredit += Number(txn.credit) || 0;
+    totalDebit += Number(txn.debit) || 0;
+ 
+    tbody.innerHTML += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${txn.date}</td>
+        <td>${txn.header}</td>
+        <td>${txn.credit || ""}</td>
+        <td>${txn.debit || ""}</td>
+        <td>
+          <button class="btn btn-danger btn-sm" onclick="removeTransaction(${index})">Remove</button>
+        </td>
+      </tr>
+    `;
+  });
+ 
+  document.getElementById("totalCredit").innerText = totalCredit;
+  document.getElementById("totalDebit").innerText = totalDebit;
+  document.getElementById("balance").innerText = totalCredit - totalDebit;
+}
+ 
+
+function addTransaction() {
+  const date = document.getElementById("date").value;
+  const header = document.getElementById("header").value;
+  const credit = document.getElementById("credit").value;
+  const debit = document.getElementById("debit").value;
+ 
+  if (!date || !header || (!credit && !debit)) {
+    alert("Please fill all required fields");
+    return;
+  }
+ 
+  transactions.push({ date, header, credit, debit });
+  saveData();
+  renderTable();
+ 
+  // Clear inputs
+  document.getElementById("date").value = "";
+  document.getElementById("header").value = "";
+  document.getElementById("credit").value = "";
+  document.getElementById("debit").value = "";
+}
+ 
+
+function removeTransaction(index) {
+  transactions.splice(index, 1);
+  saveData();
+  renderTable();
+}
+ 
+// Initial load
+renderTable();
+</script>
+ 
+</body>
+</html>
+ 
