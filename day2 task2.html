@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Typing Skill Assessment</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      margin-top: 10px;
+    }
+    .box {
+      border: 1px dashed black;
+      padding: 10px;
+      margin-top: 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+ 
+<body>
+ 
+<h3>Typing Skill Assessment</h3>
+<hr>
+ 
+<p>Clock: <span id="clock"></span></p>
+<p>Timer: <span id="timer">00:00:00</span></p>
+ 
+<div class="box">
+  <textarea id="textArea" placeholder="Start typing..."></textarea>
+</div>
+ 
+<hr>
+ 
+<h4>Summary</h4>
+<p>Words Typed Per Second: <span id="wps">0</span></p>
+<p>Chars Typed Per Second: <span id="cps">0</span></p>
+<p>Sentences Typed Per Minute: <span id="spm">0</span></p>
+ 
+<button onclick="resetApp()">RESET</button>
+ 
+<script>
+
+setInterval(() => {
+  const now = new Date();
+  document.getElementById("clock").innerText = now.toLocaleTimeString();
+}, 1000);
+ 
+let startTime = null;
+let timerInterval = null;
+ 
+
+const textArea = document.getElementById("textArea");
+ 
+textArea.addEventListener("focus", () => {
+  if (!startTime) {
+    startTime = new Date();
+ 
+    timerInterval = setInterval(updateTimer, 1000);
+  }
+});
+ 
+
+textArea.addEventListener("blur", () => {
+  clearInterval(timerInterval);
+  calculateResults();
+});
+ 
+
+function updateTimer() {
+  const now = new Date();
+  const diff = Math.floor((now - startTime) / 1000);
+ 
+  let hrs = Math.floor(diff / 3600);
+  let mins = Math.floor((diff % 3600) / 60);
+  let secs = diff % 60;
+ 
+  document.getElementById("timer").innerText =
+    `${pad(hrs)}:${pad(mins)}:${pad(secs)}`;
+}
+ 
+
+function pad(n) {
+  return n < 10 ? "0" + n : n;
+}
+ 
+
+function calculateResults() {
+  const text = textArea.value;
+ 
+  const timeTaken = (new Date() - startTime) / 1000;
+ 
+  const words = text.trim().split(/\s+/).filter(w => w.length > 0);
+  const chars = text.length;
+  const sentences = text.split(/[.!?]/).filter(s => s.trim().length > 0);
+ 
+  document.getElementById("wps").innerText = (words.length / timeTaken).toFixed(2);
+  document.getElementById("cps").innerText = (chars / timeTaken).toFixed(2);
+  document.getElementById("spm").innerText = ((sentences.length / timeTaken) * 60).toFixed(2);
+}
+ 
+
+function resetApp() {
+  textArea.value = "";
+  document.getElementById("timer").innerText = "00:00:00";
+  document.getElementById("wps").innerText = "0";
+  document.getElementById("cps").innerText = "0";
+  document.getElementById("spm").innerText = "0";
+ 
+  clearInterval(timerInterval);
+  startTime = null;
+}
+</script>
+ 
+</body>
+</html>
+ 
