@@ -1,0 +1,213 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "crn": "CRN001",
+      "name": "John Doe",
+      "mobile": "9876543210",
+      "mailId": "john.doe@example.com"
+    },
+    {
+      "id": 2,
+      "crn": "CRN002",
+      "name": "Jane Smith",
+      "mobile": "9876543211",
+      "mailId": "jane.smith@example.com"
+    },
+    {
+      "id": 3,
+      "crn": "CRN003",
+      "name": "Alice Johnson",
+      "mobile": "9876543212",
+      "mailId": "alice.johnson@example.com"
+    },
+    {
+      "mailId": "test4@test.com",
+      "crn": "TEST004",
+      "name": "Test Again",
+      "mobile": "7777777777",
+      "id": 4
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "accountNumber": "ACC001",
+      "type": "Savings",
+      "currentBalance": 27000,
+      "customerId": 1
+    },
+    {
+      "id": 2,
+      "accountNumber": "ACC002",
+      "type": "Current",
+      "currentBalance": 25000,
+      "customerId": 1
+    },
+    {
+      "id": 3,
+      "accountNumber": "ACC003",
+      "type": "Savings",
+      "currentBalance": 28500,
+      "customerId": 2
+    },
+    {
+      "id": 4,
+      "accountNumber": "ACC004",
+      "type": "Current",
+      "currentBalance": 5000,
+      "customerId": 2
+    },
+    {
+      "id": 5,
+      "accountNumber": "ACC005",
+      "type": "Savings",
+      "currentBalance": 25500,
+      "customerId": 3
+    },
+    {
+      "customerId": 4,
+      "currentBalance": 10000,
+      "accountNumber": "ACC001",
+      "type": "Savings",
+      "id": 6
+    },
+    {
+      "customerId": 1,
+      "currentBalance": 50000,
+      "accountNumber": "ACC003",
+      "type": "Current",
+      "id": 7
+    }
+  ],
+  "transactions": [
+    {
+      "id": 1,
+      "txnDate": "2024-01-15",
+      "header": "Salary Deposit",
+      "amount": 25000,
+      "type": "Credit",
+      "accountId": 1
+    },
+    {
+      "id": 2,
+      "txnDate": "2024-01-16",
+      "header": "ATM Withdrawal",
+      "amount": 5000,
+      "type": "Debit",
+      "accountId": 1
+    },
+    {
+      "id": 3,
+      "txnDate": "2024-01-17",
+      "header": "Bill Payment",
+      "amount": 3000,
+      "type": "Debit",
+      "accountId": 1
+    },
+    {
+      "id": 4,
+      "txnDate": "2024-01-18",
+      "header": "Transfer In",
+      "amount": 10000,
+      "type": "Credit",
+      "accountId": 1
+    },
+    {
+      "id": 5,
+      "txnDate": "2024-01-15",
+      "header": "Invoice Payment",
+      "amount": 50000,
+      "type": "Debit",
+      "accountId": 2
+    },
+    {
+      "id": 6,
+      "txnDate": "2024-01-16",
+      "header": "Client Payment",
+      "amount": 75000,
+      "type": "Credit",
+      "accountId": 2
+    },
+    {
+      "id": 7,
+      "txnDate": "2024-01-15",
+      "header": "Salary Deposit",
+      "amount": 30000,
+      "type": "Credit",
+      "accountId": 3
+    },
+    {
+      "id": 8,
+      "txnDate": "2024-01-17",
+      "header": "Shopping",
+      "amount": 2000,
+      "type": "Debit",
+      "accountId": 3
+    },
+    {
+      "id": 9,
+      "txnDate": "2024-01-18",
+      "header": "Interest Credit",
+      "amount": 500,
+      "type": "Credit",
+      "accountId": 3
+    },
+    {
+      "id": 10,
+      "txnDate": "2024-01-16",
+      "header": "Dividend Payment",
+      "amount": 15000,
+      "type": "Debit",
+      "accountId": 4
+    },
+    {
+      "id": 11,
+      "txnDate": "2024-01-17",
+      "header": "Royalty Income",
+      "amount": 20000,
+      "type": "Credit",
+      "accountId": 4
+    },
+    {
+      "id": 12,
+      "txnDate": "2024-01-15",
+      "header": "Salary Deposit",
+      "amount": 35000,
+      "type": "Credit",
+      "accountId": 5
+    },
+    {
+      "id": 13,
+      "txnDate": "2024-01-16",
+      "header": "Loan EMI",
+      "amount": 8000,
+      "type": "Debit",
+      "accountId": 5
+    },
+    {
+      "id": 14,
+      "txnDate": "2024-01-17",
+      "header": "Utility Bill",
+      "amount": 1500,
+      "type": "Debit",
+      "accountId": 5
+    },
+    {
+      "accountId": 6,
+      "txnDate": "2026-04-07",
+      "header": "Salary Deposit",
+      "amount": 10000,
+      "type": "Credit",
+      "id": 15
+    },
+    {
+      "id": 16,
+      "accountId": 7,
+      "txnDate": "2026-04-07",
+      "header": "Deposit",
+      "amount": 50000,
+      "type": "Credit"
+    }
+  ]
+}
